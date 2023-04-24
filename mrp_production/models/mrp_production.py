@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    @api.multi
+    
     def action_assign(self):
         for production in self:
             location_dest_id = production.move_raw_ids.location_id
