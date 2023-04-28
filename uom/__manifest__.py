@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'mrp production',
+    'name': 'uom uom',
     'summary': '''
-        Production Bioest
+        uom Bioest
     ''',
     'description': '''
-        - Mrp production in Bioest
+        - Validacion unidad de medida en los diferentes procesos de movimientos producto.
     ''',
     'author': '1-800CLOUD',
     'website': 'http://www.1-800cloud.com',
     'category': 'Accounting/Accounting',
     'license': 'LGPL-3',
-    'version': '15.0.0.0.2',
+    'version': '15.0.0.0.0',
     'depends': [
         'mrp'
     ],
