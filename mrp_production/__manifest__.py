@@ -13,6 +13,7 @@
     'license': 'LGPL-3',
     'version': '15.0.0.0.2',
     'depends': [
+        'base',
         'mrp'
     ],
     'data': [
