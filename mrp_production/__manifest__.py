@@ -11,14 +11,15 @@
     'website': 'http://www.1-800cloud.com',
     'category': 'Manufacturing/Manufacturing',
     'license': 'LGPL-3',
-    'version': '15.0.0.0.2',
+    'version': '15.0.0.0.3',
     'depends': [
         'base',
-        'mrp'
+        'mrp',
+        'product'
     ],
     'data': [
         # 'security/ir.model.access.csv',
-        #'views/product_category_views.xml',
+        'views/product_template_views.xml',
         # 'views/templates.xml',
     ],
 }

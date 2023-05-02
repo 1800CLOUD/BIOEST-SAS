@@ -1,0 +1,13 @@
+<odoo>
+    <record id="product_template_form_view_product_bio" model="ir.ui.view">
+        <field name="name">product.template.view.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_general']/field[@name='uom_po_id']" position="after">
+                <field name="cost_manufacturing"/> 
+                <field name="partner_property"  options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
