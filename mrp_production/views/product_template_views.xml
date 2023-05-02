@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='group_general']/field[@name='uom_po_id']" position="after">
-                <field name="cost_manufacturing"/> 
+                <field name="cost_manufacturing" widget='monetary'/> 
                 <field name="partner_property"  options="{'no_create': True}"/>
             </xpath>
         </field>
