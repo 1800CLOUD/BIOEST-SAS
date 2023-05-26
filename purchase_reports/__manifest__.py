@@ -2,7 +2,7 @@
 {
     'name': 'Purchase Report',
     'summary': '''
-        Compras Agromark
+        reporte de compras
     ''',
     'description': '''
         - 
