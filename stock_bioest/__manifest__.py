@@ -10,7 +10,7 @@
     'author': '1-800CLOUD',
     'website': 'http://www.1-800cloud.com',
     'category': 'Inventory/Inventory',
-    'licence': 'LGPL-3',
+    'license': 'LGPL-3',
     'version': '15.0.0.0.2',
     'depends': [
         'stock'
