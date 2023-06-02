@@ -12,7 +12,7 @@ import io
 
 class ReportPurchase(models.TransientModel):
     _name = 'report.purchase'
-    _description = 'Reporte Disponibilidad Stock'
+    _description = 'Reporte de Compras'
     
     name = fields.Char('Nombre', readonly=True, default='Reporte de compras')
     partner_ids = fields.Many2many('res.partner', string='Proveedores', copy=False)
@@ -52,7 +52,7 @@ class ReportPurchase(models.TransientModel):
             
         qry = f'''
             INSERT INTO report_purchase_line (invoice_date, partner_vat, partner_id, purchase_id, invoice_id, journal_id, default_code, 
-                        product_id, account_id, amount_untaxed, tax_id, value_tax, amount_total, move_type, product_type, create_date, write_date)
+                        product_id, account_id, account_inventory, amount_untaxed, tax_id, value_tax, amount_total, move_type, product_type, create_date, write_date)
                 SELECT
                     am.invoice_date,
                     rp.vat, 
@@ -63,6 +63,7 @@ class ReportPurchase(models.TransientModel):
                     pt.default_code, 
                     aml.product_id,
                     aml.account_id,
+                    svl.aml_code,
                     aml.balance,
                     at.tax,
                     CASE 
@@ -106,6 +107,19 @@ class ReportPurchase(models.TransientModel):
                                 amltax.account_tax_id
                                 LIMIT 1
                 ) at ON true
+                LEFT JOIN LATERAL (
+                                SELECT
+                                    aa2.code AS aml_code
+                                FROM 
+                                    stock_valuation_layer svl 
+                                LEFT JOIN account_move am2 ON svl.account_move_id = am2.id 
+                                LEFT JOIN account_move_line aml2 ON am2.id = aml2.move_id
+                                LEFT JOIN account_account aa2 ON aml2.account_id = aa2.id 
+                                WHERE 
+                                    pp.id = svl.product_id AND
+                                    aa2.code LIKE '1435%'
+                                LIMIT 1
+                ) svl ON true
                 
                  
 
@@ -125,6 +139,7 @@ class ReportPurchase(models.TransientModel):
                 pt.default_code,
                 aml.product_id,
                 aml.account_id,
+                svl.aml_code,
                 am.move_type,
                 pt.detailed_type,
                 aml.balance,
@@ -161,6 +176,7 @@ class ReportPurchase(models.TransientModel):
                 pt.default_code,
                 pt.name,
                 aa.code, 
+                svl.aml_code,
                 aml.balance,
                 at.tax,
                 at.value,
@@ -195,6 +211,19 @@ class ReportPurchase(models.TransientModel):
                                 dt.id
                                 LIMIT 1
                 ) at ON true
+                LEFT JOIN LATERAL (
+                                SELECT
+                                    aa2.code AS aml_code
+                                FROM 
+                                    stock_valuation_layer svl 
+                                LEFT JOIN account_move am2 ON svl.account_move_id = am2.id 
+                                LEFT JOIN account_move_line aml2 ON am2.id = aml2.move_id
+                                LEFT JOIN account_account aa2 ON aml2.account_id = aa2.id 
+                                WHERE 
+                                    pp.id = svl.product_id AND
+                                    aa2.code LIKE '1435%'
+                                LIMIT 1
+                ) svl ON true
                 LEFT JOIN account_journal aj ON aml.journal_id = aj.id
                 LEFT JOIN account_account aa ON aml.account_id = aa.id 
 
@@ -215,6 +244,7 @@ class ReportPurchase(models.TransientModel):
                 am.name,
                 aj.name,
                 aa.code,
+                svl.aml_code,
                 at.tax,
                 at.value,
                 am.move_type,
@@ -226,7 +256,6 @@ class ReportPurchase(models.TransientModel):
         result = cr.fetchall()
 
         return result
-
     def get_xlsx_report(self):
         result = self._button_excel()
         output = io.BytesIO()
@@ -239,6 +268,7 @@ class ReportPurchase(models.TransientModel):
                   'REFERENCIA INTERNA',
                   'PRODUCTO',
                   'CUENTA',
+                  'CUENTA INVENTARIO',
                   'VALOR A. IMPUESTO', 
                   'VALOR IVA',
                   'TARIFA IVA',
@@ -254,7 +284,6 @@ class ReportPurchase(models.TransientModel):
         titles_format.set_bold()
         worksheet.set_column("A:G", 22)
         worksheet.set_row(0, 25)
-        money_format = workbook.add_format({'num_format': '$#,##0.00'})
         
         col_num = 0
         for title in titles:
@@ -264,16 +293,11 @@ class ReportPurchase(models.TransientModel):
         for index, data in enumerate(result):
             row = index + 1
             col_num = 0
-            for i, d in enumerate(data):
-                if i in [9,11, 12]:
-                    worksheet.write(row, col_num, d, money_format)
-                else:
-                    worksheet.write(row, col_num, d)
+            for d in data:
                 if isinstance(d, datetime.date):
                     d = d.strftime("%Y-%m-%d")
-                    worksheet.write(row, col_num, d)
+                worksheet.write(row, col_num, d)
                 col_num += 1
-            
         
         workbook.close()
         xlsx_data = output.getvalue()
@@ -314,6 +338,7 @@ class ReportPurchaseLine(models.Model):
     product_id = fields.Many2one('product.product', 'Producto', copy=False, readonly=True)
     journal_id = fields.Many2one('account.journal', 'Diario', copy=False, readonly=True)
     account_id = fields.Many2one('account.account', 'Cuenta', copy=False, readonly=True)
+    account_inventory = fields.Char('Cuenta Inventario', copy=False, readonly=True)
     amount_untaxed = fields.Float('Valor A. impuesto', copy=False, readonly=True)
     tax_id = fields.Many2one('account.tax', 'Impuesto', copy=False, readonly=True)
     amount_total = fields.Float('Valor total', copy=False, readonly=True)
