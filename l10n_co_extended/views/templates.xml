@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <template id="report_account_move_einvoicing_document" inherit_id="l10n_co_bloodo.report_account_move_einvoicing_document">
+            <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[@name='th_subtotal']/span" position="attributes">
+                <attribute name="groups"></attribute>
+            </xpath>
+            <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[@name='th_subtotal']/span[2]" position="replace"/>
+            <xpath expr="//table[@name='invoice_line_table']/tbody/t[@t-foreach='lines']/tr/t/td[hasclass('o_price_total')]/span" position="attributes">
+                <attribute name="groups"></attribute>
+            </xpath>
+            <xpath expr="//table[@name='invoice_line_table']/tbody/t[@t-foreach='lines']/tr/t/td[hasclass('o_price_total')]/span[2]" position="replace"/>
+        </template>
+    </data>
+</odoo>
