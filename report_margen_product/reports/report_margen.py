@@ -80,8 +80,8 @@ class ReportInvoice(models.TransientModel):
                                 LEFT JOIN account_account aa2 ON aml2.account_id = aa2.id 
                                 WHERE 
                                     aml2.product_id = pp.id AND
-                                    aa2.code LIKE '6135%' AND
-                                    am.date BETWEEN  '{dt_from}' AND '{dt_to}' 
+                                    aa2.code LIKE '61%' AND
+                                    aml2.date BETWEEN  '{dt_from}' AND '{dt_to}' 
 
 
                                 LIMIT 1
@@ -157,8 +157,8 @@ class ReportInvoice(models.TransientModel):
                                 LEFT JOIN account_account aa2 ON aml2.account_id = aa2.id 
                                 WHERE 
                                     aml2.product_id = pp.id AND
-                                    aa2.code LIKE '6135%' AND
-                                    am.date BETWEEN  '{dt_from}' AND '{dt_to}' 
+                                    aa2.code LIKE '61%' AND
+                                    aml2.date BETWEEN  '{dt_from}' AND '{dt_to}' 
 
 
                                 LIMIT 1
@@ -216,7 +216,7 @@ class ReportInvoice(models.TransientModel):
             row = index + 1
             col_num = 0
             for i, d in enumerate(data):
-                if i in [5,6, 7]:
+                if i in [4,5, 6]:
                     worksheet.write(row, col_num, d, money_format)
                 else:
                     worksheet.write(row, col_num, d)
