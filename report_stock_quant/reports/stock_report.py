@@ -116,16 +116,16 @@ class ReportStockQuant(models.TransientModel):
         
         excel_qry = f'''            
                 SELECT 
-                    DISTICNT pt.name, 
+                    DISTINCT pt.name, 
                     pp.default_code, 
                     pb.name, 
                     sl.name, 
                     spl.name,  
                     pc.name,  
                     uu.name, 
-                    rsql.quantity, 
-                    rsql.reserved_quantity, 
-                    rsql.available_qty 
+                    sq.quantity, 
+                    sq.reserved_quantity, 
+                    sq.quantity - sq.reserved_quantity
             FROM
                 stock_quant sq
                 INNER JOIN product_product pp ON pp.id = sq.product_id
@@ -134,10 +134,10 @@ class ReportStockQuant(models.TransientModel):
                 LEFT JOIN product_brand pb ON pb.id = pt.product_brand_id
                 LEFT JOIN stock_production_lot spl ON spl.id = sq.lot_id
                 LEFT JOIN product_category pc ON pc.id = pt.categ_id
-                LEFT JOIN uom_uom uu ON uu.id = rsql.product_uom_id
+                LEFT JOIN uom_uom uu ON uu.id = pt.uom_id
             WHERE
                 sl.usage = 'internal' AND 
-                rsql.quantity > 0.0 AND
+                sq.quantity > 0.0 AND
                 pt.detailed_type = 'product'
                 {wh}
         '''
