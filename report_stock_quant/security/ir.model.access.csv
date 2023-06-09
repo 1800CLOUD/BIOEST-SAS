@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+report_stock_quant.access_report_stock_quant,report.stock.quant,report_stock_quant.model_report_stock_quant,,1,1,1,1
+report_stock_quant.access_report_stock_quant_line,report.stock.quant.line,report_stock_quant.model_report_stock_quant_line,,1,1,1,1
