@@ -11,7 +11,7 @@
     'website': 'http://www.1-800cloud.com',
     'category': 'Manufacturing/Manufacturing',
     'license': 'LGPL-3',
-    'version': '15.0.0.0.3',
+    'version': '15.0.0.0.4',
     'depends': [
         'base',
         'mrp',

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from . import mrp_production
-from . import uom_uom
+#from . import mrp_production
+from . import mrp_workorder
 from . import product
