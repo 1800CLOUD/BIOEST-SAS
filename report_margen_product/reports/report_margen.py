@@ -89,7 +89,7 @@ class ReportInvoice(models.TransientModel):
 
                     WHERE
                         am.move_type IN ('out_invoice', 'out_refund') AND
-                        pt.detailed_type = 'product' AND
+                        pt.detailed_type IN ('product', 'service', 'consu') AND
                         am.state = 'posted' AND
                         am.invoice_date BETWEEN   '{dt_from}' AND '{dt_to}' 
                         {wh}
@@ -166,7 +166,7 @@ class ReportInvoice(models.TransientModel):
 
                         WHERE
                             am.move_type IN ('out_invoice', 'out_refund') AND
-                            pt.detailed_type = 'product' AND
+                            pt.detailed_type IN ('product', 'consu', 'service') AND
                             am.state = 'posted' AND
                             am.invoice_date BETWEEN   '{dt_from}' AND '{dt_to}' 
                             {wh}
