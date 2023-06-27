@@ -13,5 +13,10 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self).action_cancel()
         return res
 
+    def action_confirm(self):
+        if not self.env.user.has_group('sale_bioest.group_manager_sales_bi'):
+            raise ValidationError('No esta autorizado para confirmar pedidos de venta, por favor contacte a soporte si cree que deberia tener el permiso')
+        res = super(SaleOrder, self).action_confirm()
+        return res
 
     
