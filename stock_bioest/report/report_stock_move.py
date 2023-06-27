@@ -1,0 +1,46 @@
+from odoo import models
+
+class ReportStockMove(models.AbstractModel):
+    _inherit = 'report.stock_report.report_stock_move'
+
+    def generate_xlsx_report(self, workbook, data, objs):
+        bold = workbook.add_format({'bold': True})
+        money = workbook.add_format({'num_format': '$#,##0'})
+
+        for product in data.get('products'):
+            worksheet = workbook.add_worksheet(product.get('name'))
+
+            worksheet.write('A1', 'Fecha', bold)
+            worksheet.write('B1', 'Referencia', bold)
+            worksheet.write('N1', 'Descripción', bold)
+            worksheet.write('C1', 'Producto', bold)
+            worksheet.write('D1', 'Desde', bold)
+            worksheet.write('E1', 'A', bold)
+            worksheet.write('F1', 'Tipo', bold)
+            worksheet.write('G1', 'C. Inicial', bold)
+            worksheet.write('H1', 'Cantidad', bold)
+            worksheet.write('I1', 'C. Final', bold)
+            worksheet.write('J1', 'UdM', bold)
+            worksheet.write('K1', 'P. Unitario', bold)
+            worksheet.write('L1', 'P. Total', bold)
+            worksheet.write('M1', 'Estado', bold)
+            worksheet.write('N1', 'Descripción', bold)
+
+            row = 2
+            for move in product.get('moves'):
+                worksheet.write('A%s' % row, move.get('date'))
+                worksheet.write('B%s' % row, move.get('reference'))
+                worksheet.write('N%s' % row, move.get('description_move'))
+                worksheet.write('C%s' % row, move.get('product'))
+                worksheet.write('D%s' % row, move.get('from'))
+                worksheet.write('E%s' % row, move.get('to'))
+                worksheet.write('F%s' % row, move.get('type'))
+                worksheet.write('G%s' % row, move.get('init'))
+                worksheet.write('H%s' % row, move.get('demand'))
+                worksheet.write('I%s' % row, move.get('final'))
+                worksheet.write('J%s' % row, move.get('uom'))
+                worksheet.write('K%s' % row, move.get('unit'), money)
+                worksheet.write('L%s' % row, move.get('total'), money)
+                worksheet.write('M%s' % row, move.get('status'))
+                worksheet.write('N%s' % row, move.get('description_move') or '')
+                row += 1
