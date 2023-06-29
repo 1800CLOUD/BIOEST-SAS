@@ -10,7 +10,7 @@ class StockQuant(models.Model):
     _inherit = 'stock.quant'
 
 
-    description = fields.Text('Motivo del movimiento', copy=False, requiered=True)
+    description = fields.Text('Motivo del movimiento', copy=False)
 
     @api.model
     def _get_inventory_fields_create(self):
@@ -56,17 +56,3 @@ class StockQuant(models.Model):
         }
     
     
-    #def _apply_inventory(self):
-    #    super(StockQuant, self)._apply_inventory()  
-#
-    #    move_vals = []
-    #    for quant in self:
-    #        move_vals.append({
-    #            'product_id': quant.product_id.id,
-    #            'location_id': quant.location_id.id,
-    #            'location_dest_id': quant.location_id.id,
-    #            'quantity_done': quant.inventory_diff_quantity,
-    #            'description_move': quant.description,  # Agrega la descripción al diccionario de valores del movimiento
-    #        })
-    #    moves = self.env['stock.move'].create(move_vals)
-    #    moves._action_done()
