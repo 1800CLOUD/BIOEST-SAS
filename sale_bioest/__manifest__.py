@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Account Bioest',
+    'name': 'Sale Bioest',
     'summary': '''
-        Account Bioest
+        Sale order Bioest
     ''',
     'description': '''
-        - Cuenta de gastos en categoría de producto permite seleccionar cuentas tipo gastos y otros.
+        - Modificaciones al modulo de ventas para Bioest.
     ''',
     'author': '1-800CLOUD',
     'website': 'http://www.1-800cloud.com',
     'category': 'Accounting/Accounting',
     'license': 'LGPL-3',
-    'version': '15.0.0.0.8',
+    'version': '15.0.0.0.3',
     'depends': [
         'account_baseline'
     ],
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/product_category_views.xml',
+        'security/security.xml',
         # 'views/templates.xml',
     ],
 }
