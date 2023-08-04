@@ -51,9 +51,10 @@ class StockQuant(models.Model):
         action_rec = self.with_context(search_default_internal_loc=1,
                                        search_default_productgroup=1,
                                        search_default_locationgroup=1,).action_view_quants()
-        action_rec['domain'] = [('owner_id', '!=', False)]
-        action_rec['name'] = 'Existencias a la Mano por Tercero'
+        # action_rec['domain'] = [('owner_id', '!=', False)]
+        action_rec['name'] = 'Existencias a la Mano'
         action_rec['view_id'] = self.env.ref('stock_partner_report.stock_quant_owner_tree_editable_view').id
+        action_rec['context']['search_default_is_owner'] = 1
         views = []
         for view in action_rec['views']:
             if view[1] == 'list':

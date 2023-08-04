@@ -10,10 +10,11 @@
     'author': 'My Company',
     'website': 'http://www.yourcompany.com',
     'category': 'Inventory/Inventory',
-    'version': '15.0.0.0.2',
+    'version': '15.0.0.0.3',
     'license': 'LGPL-3',
     'depends': [
         'stock_account',
+        'stock_report',
     ],
     'data': [
         'security/ir.model.access.csv',

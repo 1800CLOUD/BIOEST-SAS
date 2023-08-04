@@ -27,6 +27,10 @@ class ProductCostOwner(models.Model):
                                      'Categoria de UdM del producto',
                                      related='product_tmpl_id.uom_id.category_id')
     
+    _sql_constraints = [
+        ('product_uniq', 'unique(product_tmpl_id)', 'Solo puede haber un propietario por producto!'),
+    ]
+    
     def get_value(self, partner_id=False, product_id=False, uom_q_id=False):
         uom_obj = self.env['uom.uom']
         msg = ''

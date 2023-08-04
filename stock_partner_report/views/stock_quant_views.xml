@@ -32,11 +32,25 @@
                     <field name="inventory_quantity_auto_apply" string="On Hand Quantity" readonly="0"/>
                     <field name="available_quantity" optional="show"/>
                     <field name="product_uom_id" groups="uom.group_uom"/>
+                    <field name="value" optional="hidden" sum="Total"/>
                     <field name="owner_val_unit" optional="show" sum="Total"/>
                     <field name="owner_val_total" optional="show" sum="Total"/>
                     <field name="currency_id" optional="hide"/>
                     <field name="company_id" groups="base.group_multi_company" optional="show"/>
                 </tree>
+            </field>
+        </record>
+
+        <record id="stock_quant_owner_search" model="ir.ui.view">
+            <field name="name">stock.quant.owner.search.view</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.quant_search_view"/>
+            <field name="arch" type="xml">
+                <filter name="to_apply" position="after">
+                    <separator/>
+                    <filter name="is_owner" string="De terceros" domain="[('owner_id', '!=', False)]"/>
+                    <filter name="is_not_owner" string="Propios" domain="[('owner_id', '=', False)]"/>
+                </filter>
             </field>
         </record>
 
@@ -51,8 +65,20 @@ action = action_rec
             </field>
         </record>
 
-        <menuitem id="menu_valuation_owner" name="Informe de Inventario propietario"
-              parent="stock.menu_warehouse_report" sequence="100"
-              action="action_view_quants"/>
+        <menuitem 
+            id="menu_valuation_owner" 
+            name="Informe de Inventario propietario"
+            parent="stock.menu_warehouse_report"
+            action="action_view_quants"
+            sequence="100"
+            active="False"/>
+        
+        <menuitem
+            id="menu_valuation_owner" 
+            name="Reporte de Inventario propietario"
+            parent="stock_report.menu_stock_1800"
+            action="action_view_quants"
+            sequence="10"/>
+
     </data>
 </odoo>
