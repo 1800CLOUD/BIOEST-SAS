@@ -1,6 +1,6 @@
 <odoo>
      <template id="report_template_stock_move_inherit" inherit_id="stock_report.report_template_stock_move">
-        <xpath expr="//div[@class='page']/div[2]" position="replace">
+        <xpath expr="//div[hasclass('page')]/div[2]" position="replace">
             <t t-set="report_data" t-value="doc.report_data()" />
             <t t-foreach="report_data.get('products')" t-as="product">
                 <div>
