@@ -41,19 +41,6 @@
             </field>
         </record>
 
-        <record id="stock_quant_owner_search" model="ir.ui.view">
-            <field name="name">stock.quant.owner.search.view</field>
-            <field name="model">stock.quant</field>
-            <field name="inherit_id" ref="stock.quant_search_view"/>
-            <field name="arch" type="xml">
-                <filter name="to_apply" position="after">
-                    <separator/>
-                    <filter name="is_owner" string="De terceros" domain="[('owner_id', '!=', False)]"/>
-                    <filter name="is_not_owner" string="Propios" domain="[('owner_id', '=', False)]"/>
-                </filter>
-            </field>
-        </record>
-
         <record model="ir.actions.server" id="action_view_quants"> <!-- Menu + python -->
             <field name="name">Inventory owner</field>
             <field name="model_id" ref="stock.model_stock_quant"/>

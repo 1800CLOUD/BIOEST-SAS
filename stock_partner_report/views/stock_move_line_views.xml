@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="stock_report.stock_move_line_action" model="ir.actions.act_window">
+            <field name="context">{'search_default_filter_last_12_months': 1, 'search_default_done': 1, 'search_default_groupby_product_id': 1, 'create': 0, 'search_default_is_owner': 1}</field>
+        </record>
+
+    </data>
+</odoo>
