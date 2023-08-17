@@ -10,7 +10,7 @@
     'author': 'My Company',
     'website': 'http://www.yourcompany.com',
     'category': 'Inventory/Inventory',
-    'version': '15.0.0.0.4',
+    'version': '15.0.0.0.5',
     'license': 'LGPL-3',
     'depends': [
         'stock_account',
