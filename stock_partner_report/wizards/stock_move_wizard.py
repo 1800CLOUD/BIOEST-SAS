@@ -15,7 +15,7 @@ class StockMoveWizard(models.TransientModel):
                 partner_id=self.owner_id.id,
                 product_id=product.product_tmpl_id.id,
                 uom_q_id=move.product_uom.id)
-            price_total = price_unit * vals.get('qty', 0)
+            price_total = price_unit * (vals.get('qty', 0) + vals.get('init', 0))
             vals.update({
                 'unit': price_unit,
                 'total': price_total,
