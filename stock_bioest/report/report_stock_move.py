@@ -1,18 +1,35 @@
+# -*- coding: utf-8 -*-
+
 from odoo import models
+
 
 class ReportStockMove(models.AbstractModel):
     _inherit = 'report.stock_report.report_stock_move'
 
     def generate_xlsx_report(self, workbook, data, objs):
+
         bold = workbook.add_format({'bold': True})
         money = workbook.add_format({'num_format': '$#,##0'})
 
-        for product in data.get('products'):
+        worksheet_info = workbook.add_worksheet('Información')
+        worksheet_info.write('A1', 'Compañia', bold)
+        worksheet_info.write('B1', data.get('company'))
+        worksheet_info.write('A2', 'Usuario', bold)
+        worksheet_info.write('B2', data.get('user'))
+        worksheet_info.write('A3', 'Desde', bold)
+        worksheet_info.write('B3', data.get('start'))
+        worksheet_info.write('A4', 'Hasta', bold)
+        worksheet_info.write('B4', data.get('end'))
+        if data.get('owner'):
+            worksheet_info.write('A5', 'Propietario', bold)
+            worksheet_info.write('B5', data.get('owner'))
+
+        products = data.get('products')
+        for product in products:
             worksheet = workbook.add_worksheet(product.get('name'))
 
             worksheet.write('A1', 'Fecha', bold)
             worksheet.write('B1', 'Referencia', bold)
-            worksheet.write('N1', 'Descripción', bold)
             worksheet.write('C1', 'Producto', bold)
             worksheet.write('D1', 'Desde', bold)
             worksheet.write('E1', 'A', bold)
@@ -30,7 +47,6 @@ class ReportStockMove(models.AbstractModel):
             for move in product.get('moves'):
                 worksheet.write('A%s' % row, move.get('date'))
                 worksheet.write('B%s' % row, move.get('reference'))
-                worksheet.write('N%s' % row, move.get('description_move'))
                 worksheet.write('C%s' % row, move.get('product'))
                 worksheet.write('D%s' % row, move.get('from'))
                 worksheet.write('E%s' % row, move.get('to'))
