@@ -190,6 +190,7 @@ class ReportMargenSale(models.TransientModel):
                             LEFT JOIN product_template pt ON pt.id = pp.product_tmpl_id
                             LEFT JOIN product_brand pb ON pt.product_brand_id = pb.id
                             LEFT JOIN res_partner rp ON am.partner_id = rp.id
+                            LEFT JOIN sale_order so ON am.sale_id = so.id
                             LEFT JOIN (
                                     SELECT
                                         aml2.product_id AS product_id,
