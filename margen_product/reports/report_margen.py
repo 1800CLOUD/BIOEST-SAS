@@ -22,6 +22,8 @@ class ReportMargenSale(models.TransientModel):
     brand_ids = fields.Many2many('product.brand', string='Marcas')
     xls_file = fields.Binary(string="XLS file")
     xls_filename = fields.Char()
+    group_by_month = fields.Boolean('Por mes',
+                                    help='Agrupa los resultados por mes, cliente y producto')
     
 
     def compute_report(self):
@@ -40,88 +42,56 @@ class ReportMargenSale(models.TransientModel):
         if self.brand_ids:
             wh += _add_where('pt', 'product_brand_id', self.brand_ids)
 
-            
+
         #add_fields_insert, add_fields_select, add_fields_from = self.extended_compute_fields()
-            
+
         cr.execute(f'DELETE FROM margen_report_line_sale')
-            
+
         qry = f'''
-                INSERT INTO margen_report_line_sale (invoice_date, invoice_id, partner_id, product_id, default_code, product_brand_id, quantity, price_subtotal, cost, utility, 
-                                                percentage_uti, percentage_renta, create_date, write_date)
+                INSERT INTO margen_report_line_sale (
+                    invoice_date, invoice_id, partner_id, product_id,
+                    default_code, product_brand_id, quantity, price_subtotal,
+                    cost, utility, percentage_uti, percentage_renta,
+                    create_date, write_date)
 
                 SELECT
-                    am.invoice_date,
-                    aml.move_id,
-                    am.partner_id,
-                    aml.product_id, 
-                    pt.default_code,
-                    pt.product_brand_id,
-                    aml.quantity * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) AS num_qty,
-                    aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) AS subtotal,
-                    cost_line.cost_product,
-                    (aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) - cost_line.cost_product) AS difference,
-                    ((aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) - cost_line.cost_product) / 
-                    NULLIF(aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END),0)) AS utility,
-                    ((aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) - cost_line.cost_product) / 
-                    NULLIF(cost_line.cost_product, 0)) AS renta,
+                    am.invoice_date AS fecha,
+                    am.id           AS factura,
+                    rp.id           AS cliente,
+                    pp.id           AS producto,
+                    pt.default_code AS product_ref,
+                    pb.id           AS marca,
+                    aml.quantity * (CASE WHEN am.move_type = 'out_invoice' THEN 1 
+                                    ELSE -1 END)            AS cantidad,
+                    aml.amount_currency*-1                  AS ingreso,
+                    svl.value*-1    AS costo,
+                    (aml.amount_currency - svl.value)*-1    AS utilidad,
+                    (aml.amount_currency - svl.value) /
+                    NULLIF(aml.amount_currency, 0)          AS p_utilidad,
+                    (aml.amount_currency - svl.value) / 
+                    NULLIF(svl.value, 0)                    AS p_rentabilidad,
                     '{dt_now}', 
                     '{dt_now}'
 
-                FROM 
-                    account_move_line aml
-                    LEFT JOIN account_move am ON aml.move_id = am.id
-                    LEFT JOIN product_product pp ON aml.product_id = pp.id
-                    LEFT JOIN product_template pt ON pt.id = pp.product_tmpl_id
-                    LEFT JOIN product_brand pb ON pt.product_brand_id = pb.id
-                    LEFT JOIN sale_order so ON am.sale_id = so.id
-                    --LEFT JOIN stock_picking sp ON sp.sale_id = so.id
-                    --LEFT JOIN stock_move sm ON sp.id = sm.picking_id
-                    --LEFT JOIN stock_valuation_layer svl ON sm.id = svl.stock_move_id
-                    --LEFT JOIN account_move am2 ON svl.account_move_id = am2.id 
-                    --LEFT JOIN account_move_line aml2 ON am2.id = aml2.move_id
-                    --LEFT JOIN account_account aa2 ON aml2.account_id = aa2.id 
-                    LEFT JOIN (
-                            SELECT
-                                aml2.product_id AS product_id,
-                                aml2.partner_id AS partner_id,
-                                CASE 
-                                    WHEN aml2.quantity < 0 THEN ABS(aml2.quantity)
-                                    ELSE aml2.quantity * (-1)
-                                END AS quantity,
-                                sp2.sale_id AS sale,
-                                SUM(aml2.debit - aml2.credit) AS cost_product
-                            FROM
-                                stock_valuation_layer svl
-                                LEFT JOIN account_move am2 ON svl.account_move_id = am2.id 
-                                LEFT JOIN account_move_line aml2 ON am2.id = aml2.move_id
-                                LEFT JOIN stock_move sm ON svl.stock_move_id = sm.id
-                                LEFT JOIN stock_picking sp2 ON sm.picking_id = sp2.id
-                                LEFT JOIN sale_order so ON sp2.sale_id = so.id
-                                LEFT JOIN account_account aa2 ON aml2.account_id = aa2.id 
-                            WHERE
-                                ABS(svl.value) = (aml2.debit - aml2.credit) AND 
-                                aa2.code LIKE '61%' AND
-                                am2.state = 'posted' AND
-                                am2.date BETWEEN '{dt_from}' AND '{dt_to}'
-                                
-                                
-                            GROUP BY
-                                aml2.product_id,
-                                aml2.partner_id,
-                                sp2.sale_id,
-                                aml2.quantity
-                                
-                            
-    
-                        ) AS cost_line ON pp.id = cost_line.product_id AND am.partner_id = cost_line.partner_id AND cost_line.sale = so.id AND cost_line.quantity = aml.quantity
-
-
-                    WHERE
-                        am.move_type IN ('out_invoice', 'out_refund') AND
-                        pt.detailed_type IN ('product', 'service', 'consu') AND
-                        am.state = 'posted' AND
-                        am.invoice_date BETWEEN   '{dt_from}' AND '{dt_to}' 
-                        {wh}
+                FROM account_move_line AS aml
+                LEFT JOIN account_move      AS am ON am.id = aml.move_id
+                LEFT JOIN res_partner       AS rp ON rp.id = am.partner_id
+                LEFT JOIN product_product   AS pp ON pp.id = aml.product_id
+                LEFT JOIN product_template  AS pt ON pt.id = pp.product_tmpl_id
+                LEFT JOIN product_brand     AS pb ON pb.id = pt.product_brand_id
+                LEFT JOIN sale_order_line_invoice_rel AS solaml ON solaml.invoice_line_id = aml.id
+                LEFT JOIN sale_order_line   AS sol ON sol.id = solaml.order_line_id
+                LEFT JOIN sale_order        AS so ON so.id = sol.order_id
+                LEFT JOIN stock_move        AS sm ON sm.sale_line_id = sol.id
+                                                    AND sm.state = 'done'
+                                                    AND sm.product_uom_qty = aml.quantity
+                LEFT JOIN stock_valuation_layer AS svl ON svl.stock_move_id = sm.id
+                LEFT JOIN stock_picking     AS sp ON sp.id = sm.picking_id
+                WHERE am.move_type IN ('out_invoice', 'out_refund')
+                    AND am.state = 'posted'
+                    AND am.invoice_date BETWEEN '{dt_from}' AND '{dt_to}'
+                    AND pt.detailed_type IN ('product', 'consu', 'service')
+                    {wh}
                     --GROUP BY 
                     --    am.invoice_date,
                     --    am.partner_id,
@@ -133,24 +103,21 @@ class ReportMargenSale(models.TransientModel):
                     --    pt.product_brand_id,
                     --    aml.price_subtotal,
                     --    aml.id
-                    ORDER BY
-                        aml.move_id, 
-                        am.invoice_date
-                        
-                   '''     
+                ORDER BY am.id, am.invoice_date
+        '''
         cr.execute(qry)
 
     def analysis(self):
         self.compute_report()
         view_id = self.env['ir.ui.view'].search([('name','=','margen_product.view_margen_report_line_sale_pivot')])
         return {
-                'name': 'Margen de ventas de productos',
-                'view_type': 'form',
-                'view_mode': 'pivot',
-                'view_id': view_id.id, 
-                'res_model': 'margen.report.line.sale',
-                'type': 'ir.actions.act_window'
-            }
+            'name': 'Margen de ventas de productos',
+            'view_type': 'form',
+            'view_mode': 'pivot',
+            'view_id': view_id.id, 
+            'res_model': 'margen.report.line.sale',
+            'type': 'ir.actions.act_window'
+        }
 
     def _compute_excel(self):
         def _add_where(table, fld, vl):
@@ -158,86 +125,80 @@ class ReportMargenSale(models.TransientModel):
     
         #APLICAR FILTROS
         wh = '' 
+        pre = ''
+        pos = ''
         if self.partner_ids:
             wh += _add_where('am', 'partner_id', self.partner_ids)
         if self.brand_ids:
             wh += _add_where('pt', 'product_brand_id', self.brand_ids)
+        if self.group_by_month:
+            pre = '''
+                SELECT
+                    to_char(date_trunc('month', fecha)::date, 'YYYY/MM') AS mes,
+                    string_agg(q.factura, ', ' ORDER BY q.factura)  AS factura,
+                    cliente,
+                    producto,
+                    product_ref,
+                    marca,
+                    SUM(COALESCE(q.cantidad, 0))                AS cantidad,
+                    SUM(COALESCE(q.ingreso, 0))                 AS ingreso,
+                    SUM(COALESCE(q.costo, 0))                   AS costo,
+                    SUM(COALESCE(q.utilidad, 0))                AS utilidad,
+                    SUM(COALESCE(q.utilidad, 0)) / 
+                        SUM(COALESCE(q.ingreso, 0))             AS p_utilidad,
+                    SUM(COALESCE(q.utilidad, 0)) / 
+                        NULLIF(SUM(COALESCE(q.costo, 0)), 0)    AS p_rentabilidad
+                FROM (
+            '''
+            pos = '''
+                ) AS q
+                GROUP BY mes, q.cliente, q.producto, q.product_ref, q.marca
+            '''
 
         cr = self.env.cr
         dt_from = str(self.date_from)
         dt_to = str(self.date_to)
-        cr.execute(f'''SELECT
-                            am.invoice_date,
-                            am.name,
-                            rp.name,
-                            pt.name, 
-                            pt.default_code,
-                            pb.name,
-                            aml.quantity * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) AS num_qty,
-                            aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) AS subtotal,
-                            cost_line.cost_product,
-                            (aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) - cost_line.cost_product) AS difference,
-                            ((aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) - cost_line.cost_product) / 
-                            NULLIF(aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END),0)) AS utility,
-                            ((aml.price_subtotal * (CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE -1 END) - cost_line.cost_product) / 
-                            NULLIF(cost_line.cost_product, 0)) AS renta
-                            
-                            
+        cr.execute(f'''
+            {pre}
+            SELECT
+                am.invoice_date AS fecha,
+                am.name         AS factura,
+                rp.name         AS cliente,
+                pt.name         AS producto,
+                pt.default_code AS product_ref,
+                pb.name         AS marca,
+                aml.quantity * (CASE WHEN am.move_type = 'out_invoice' THEN 1 
+                                ELSE -1 END)            AS cantidad,
+                aml.amount_currency*-1                  AS ingreso,
+                svl.value*-1    AS costo,
+                (aml.amount_currency - svl.value)*-1    AS utilidad,
+                (aml.amount_currency - svl.value) /
+                NULLIF(aml.amount_currency, 0)          AS p_utilidad,
+                (aml.amount_currency - svl.value) / 
+                NULLIF(svl.value, 0)                    AS p_rentabilidad
 
-                        FROM account_move_line aml
-                            LEFT JOIN account_move am ON aml.move_id = am.id
-                            LEFT JOIN product_product pp ON aml.product_id = pp.id
-                            LEFT JOIN product_template pt ON pt.id = pp.product_tmpl_id
-                            LEFT JOIN product_brand pb ON pt.product_brand_id = pb.id
-                            LEFT JOIN res_partner rp ON am.partner_id = rp.id
-                            LEFT JOIN sale_order so ON am.sale_id = so.id
-                            LEFT JOIN (
-                                    SELECT
-                                        aml2.product_id AS product_id,
-                                        aml2.partner_id AS partner_id,
-                                        CASE 
-                                            WHEN aml2.quantity < 0 THEN ABS(aml2.quantity)
-                                            ELSE aml2.quantity * (-1)
-                                        END AS quantity,
-                                        sp2.sale_id AS sale,
-                                        SUM(aml2.debit - aml2.credit) AS cost_product
-                                    FROM
-                                        stock_valuation_layer svl
-                                        LEFT JOIN account_move am2 ON svl.account_move_id = am2.id 
-                                        LEFT JOIN account_move_line aml2 ON am2.id = aml2.move_id
-                                        LEFT JOIN stock_move sm ON svl.stock_move_id = sm.id
-                                        LEFT JOIN stock_picking sp2 ON sm.picking_id = sp2.id
-                                        LEFT JOIN sale_order so ON sp2.sale_id = so.id
-                                        LEFT JOIN account_account aa2 ON aml2.account_id = aa2.id 
-                                    WHERE
-                                        ABS(svl.value) = (aml2.debit - aml2.credit) AND 
-                                        aa2.code LIKE '61%' AND
-                                        am2.state = 'posted' AND
-                                        am2.date BETWEEN '{dt_from}' AND '{dt_to}'
-
-
-                                    GROUP BY
-                                        aml2.product_id,
-                                        aml2.partner_id,
-                                        sp2.sale_id,
-                                        aml2.quantity
-
-                            
-    
-                                ) AS cost_line ON pp.id = cost_line.product_id AND am.partner_id = cost_line.partner_id AND cost_line.sale = so.id AND cost_line.quantity = aml.quantity
-
-                        WHERE
-                            am.move_type IN ('out_invoice', 'out_refund') AND
-                            pt.detailed_type IN ('product', 'consu', 'service') AND
-                            am.state = 'posted' AND
-                            am.invoice_date BETWEEN   '{dt_from}' AND '{dt_to}' 
-                            {wh}
-                            
-                        ORDER BY
-                        am.name, 
-                        am.invoice_date
-                        
-                      ''')
+            FROM account_move_line AS aml
+            LEFT JOIN account_move      AS am ON am.id = aml.move_id
+            LEFT JOIN res_partner       AS rp ON rp.id = am.partner_id
+            LEFT JOIN product_product   AS pp ON pp.id = aml.product_id
+            LEFT JOIN product_template  AS pt ON pt.id = pp.product_tmpl_id
+            LEFT JOIN product_brand     AS pb ON pb.id = pt.product_brand_id
+            LEFT JOIN sale_order_line_invoice_rel AS solaml ON solaml.invoice_line_id = aml.id
+            LEFT JOIN sale_order_line   AS sol ON sol.id = solaml.order_line_id
+            LEFT JOIN sale_order        AS so ON so.id = sol.order_id
+            LEFT JOIN stock_move        AS sm ON sm.sale_line_id = sol.id 
+                                                AND sm.state = 'done'
+                                                AND sm.product_uom_qty = aml.quantity
+            LEFT JOIN stock_valuation_layer AS svl ON svl.stock_move_id = sm.id
+            LEFT JOIN stock_picking     AS sp ON sp.id = sm.picking_id
+            WHERE am.move_type IN ('out_invoice', 'out_refund')
+                AND am.state = 'posted'
+                AND am.invoice_date BETWEEN '{dt_from}' AND '{dt_to}'
+                AND pt.detailed_type IN ('product', 'consu', 'service')
+                {wh}
+            ORDER BY date_trunc('month', am.invoice_date)::date, rp.name, pt.name, am.name, am.invoice_date
+            {pos}
+        ''')
         result = cr.fetchall()
         return result
         
@@ -339,6 +300,3 @@ class InvoiceReportLineSale(models.TransientModel):
         ('service', 'Servicio'),
         ('consu', 'Consumible'),
         ], string='Tipo de producto', readonly=True)
-    
-    
-    

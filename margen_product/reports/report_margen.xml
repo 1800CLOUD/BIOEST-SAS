@@ -25,6 +25,7 @@
                         </group>
                         <group>
                             <group>
+                                <field name="group_by_month" />
                                 <field name="partner_ids" widget="many2many_tags"/>
                                 <field name="brand_ids" widget="many2many_tags"/>
                                 <field name="xls_filename" invisible="1"/>
@@ -104,4 +105,3 @@
 
     </data>
 </odoo>
-
