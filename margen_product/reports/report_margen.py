@@ -145,7 +145,7 @@ class ReportMargenSale(models.TransientModel):
                     SUM(COALESCE(q.costo, 0))                   AS costo,
                     SUM(COALESCE(q.utilidad, 0))                AS utilidad,
                     SUM(COALESCE(q.utilidad, 0)) / 
-                        SUM(COALESCE(q.ingreso, 0))             AS p_utilidad,
+                        NULLIF(SUM(COALESCE(q.ingreso, 0)), 0)  AS p_utilidad,
                     SUM(COALESCE(q.utilidad, 0)) / 
                         NULLIF(SUM(COALESCE(q.costo, 0)), 0)    AS p_rentabilidad
                 FROM (
