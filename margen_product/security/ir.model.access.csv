@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+margen_product.access_margen_report_product_sale,margen.report.product.sale,margen_product.model_report_margen_product_sale,,1,1,1,1
+margen_product.access_margen_report_line_sale,margen.report.line.sale,margen_product.model_margen_report_line_sale,,1,1,1,1

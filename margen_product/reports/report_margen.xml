@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="report_margen_form" model="ir.ui.view">
+            <field name="name">report.margen.form</field>
+            <field name="model">report.margen.product.sale</field>
+            <field name="arch" type="xml">
+                <form string="Informe de Margen de ventas de producto">
+                    <sheet>
+                        <div class="oe_button_box">                        
+                            <button name="get_xlsx_report" string="Excel" type="object" class="oe_highlight" icon="fa-file-excel-o" />
+                            <button name="analysis" type="object" class="oe_stat_button" icon="fa-sort-amount-asc" string="Analisis"/>
+                        </div>
+                        <h1>
+                            <strong>Informe de Margen de Producto</strong>
+                        </h1>
+                        <group col="2" string="Fechas de Corte">
+                            <group colspan="1">
+                                <field name="date_from"/>
+                            </group>
+                            <group colspan="1">
+                                <field name="date_to"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="group_by_month" />
+                                <field name="partner_ids" widget="many2many_tags"/>
+                                <field name="brand_ids" widget="many2many_tags"/>
+                                <field name="xls_filename" invisible="1"/>
+                            </group>
+                            <div>
+                                <p attrs="{'invisible': [('xls_file', '=', False)]}" class="oe_inline" name="xls_file">
+                                    Download the XLSX details file: <field name="xls_file" readonly="1" filename="xls_filename"/>
+                                </p>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_margen_report_line_sale_pivot" model="ir.ui.view">
+            <field name="name">margen.line.sale.report.pivot</field>
+            <field name="model">margen.report.line.sale</field>
+            <field name="arch" type="xml">
+                <pivot string="Margen de Productos" sample="1">
+                    <field name="product_id" type="row"/>
+                    <field name="price_subtotal" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="margin_report_view_line_sale_tree" model="ir.ui.view">
+            <field name="name">margin.report.sale.view.tree</field>
+            <field name="model">margen.report.line.sale</field>
+            <field name="arch" type="xml">
+                <tree string="Margen Productos">
+                   <field name="invoice_date" optional="show"/>                
+                   <field name="invoice_id" optional="show"/>                
+                   <field name="partner_id" optional="show"/>                
+                   <field name="product_id" optional="show"/>                
+                   <field name="default_code" optional="hide"/>              
+                   <field name="product_brand_id" optional="hide"/>                                            
+                   <field name="quantity" optional="hide" sum="Total"/>
+                   <field name="price_subtotal" optional="show" sum="Total" widget="monetary"/>
+                   <field name="cost" optional="show" sum="Total" widget="monetary"/>
+                   <field name="utility" optional="show" sum="Total" widget="monetary"/>
+                   <field name="percentage_uti" optional="show" widget="percent"/>
+                   <field name="percentage_renta" optional="show" widget="percent"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="filter_margin_products_sale" model="ir.filters">
+            <field name="name">Producto</field>
+            <field name="model_id">margen.report.line.sale</field>
+            <field name="domain">[]</field>
+            <field name="user_id" eval="False"/>
+            <field name="context">{'group_by': ['invoice_date:month', 'product_id'], 'set_visible':True, 'residual_invisible':True}</field>
+        </record>
+
+        <record id="view_margin_report_line_sale_search" model="ir.ui.view">
+            <field name="name">margin.report.line.search</field>
+            <field name="model">margen.report.line.sale</field>
+            <field name="arch" type="xml">
+                <search string="Margen Productos">
+                    <field name="product_id" />
+                    <group expand="1" string="Group By">
+                        <filter string="Marca" name='product_brand_id' context="{'group_by':'product_brand_id'}"/>
+                        <separator orientation="vertical" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_report_margen_sale" model="ir.actions.act_window">
+            <field name="name">Informe de Margen</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.margen.product.sale</field>
+            <field name="view_mode">form</field>
+            <field name="target">current</field>
+        </record>   
+
+    </data>
+</odoo>

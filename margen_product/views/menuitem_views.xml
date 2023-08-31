@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_partner_report_account"
+            name="Informes de seguimiento"
+            parent="account_report.menu_partner_report_accountant"
+            sequence="7"
+        />
+
+    <menuitem id="menu_report_margen_product_sale"
+              name="Margen de ventas de productos"
+              parent="margen_product.menu_partner_report_account"
+              action="action_report_margen_sale"
+              sequence="2"/>
+
+</odoo>
