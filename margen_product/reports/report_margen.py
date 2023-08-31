@@ -134,8 +134,12 @@ class ReportMargenSale(models.TransientModel):
         if self.group_by_month:
             pre = '''
                 SELECT
-                    to_char(date_trunc('month', fecha)::date, 'YYYY/MM') AS mes,
-                    string_agg(q.factura, ', ' ORDER BY q.factura)  AS factura,
+                    to_char(date_trunc('month', fecha)::date, 
+                            'YYYY/MM')                          AS mes,
+                    string_agg(q.factura,
+                               ', ' ORDER BY q.factura)        AS factura,
+                    string_agg(to_char(q.fecha_mov, 'YYYY-MM-dd'),
+                                ', ' ORDER BY q.fecha_mov)     AS fecha_mov,
                     cliente,
                     producto,
                     product_ref,
@@ -163,6 +167,7 @@ class ReportMargenSale(models.TransientModel):
             SELECT
                 am.invoice_date AS fecha,
                 am.name         AS factura,
+                sm.date::date   AS fecha_mov,
                 rp.name         AS cliente,
                 pt.name         AS producto,
                 pt.default_code AS product_ref,
@@ -208,6 +213,7 @@ class ReportMargenSale(models.TransientModel):
         titles = [
                 'Fecha',
                 'Factura',
+                'Fecha Entrega',
                 'Nombre Cliente',
                 'Producto', 
                 'Referencia Interna',
@@ -223,21 +229,20 @@ class ReportMargenSale(models.TransientModel):
         worksheet = workbook.add_worksheet()
 
          # Formants
-        title_format = workbook.add_format({
-            'bold': True,
-            'align': 'center',
-            'valign': 'vcenter',
-            'bg_color': '#87CEEB',
-            'font_color': 'black',
-            'font_size': 12,
-        })
-    
-        user_format = workbook.add_format({
-            'bold': True,
-            'font_color': 'black',
-        })
-        
-        date_format = workbook.add_format({'num_format': 'yyyy-mm-dd'})
+        title_format = workbook.add_format({'bold': True,
+                                            'align': 'center',
+                                            'valign': 'vcenter',
+                                            'bg_color': '#87CEEB',
+                                            'font_color': 'black',
+                                            'font_size': 12, })
+        user_format = workbook.add_format({'bold': True,
+                                           'font_color': 'black',
+                                           'valign': 'vcenter', })
+        date_format = workbook.add_format({'num_format': 'yyyy-mm-dd',
+                                           'valign': 'vcenter', })
+        money_format = workbook.add_format({'num_format': '$#,##0.00',
+                                            'valign': 'vcenter', })
+        txt_format = workbook.add_format({'valign': 'vcenter', })
 
         worksheet.set_column("A:P", 15)
         worksheet.set_row(0, 30)
@@ -259,8 +264,6 @@ class ReportMargenSale(models.TransientModel):
         for col_num, title in enumerate(titles):
             worksheet.write(5, col_num, title, title_format)
         
-    
-        money_format = workbook.add_format({'num_format': '$#,##0.00'})
         for index, data in enumerate(result):
             row = index + 6
             for col_num, d in enumerate(data):
@@ -269,7 +272,7 @@ class ReportMargenSale(models.TransientModel):
                 elif col_num in [7,8, 9]:
                     worksheet.write(row, col_num, d, money_format)
                 else:
-                    worksheet.write(row, col_num, d)
+                    worksheet.write(row, col_num, d, txt_format)
 
         
         workbook.close()
