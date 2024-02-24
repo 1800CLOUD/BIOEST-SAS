@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_project_tag_customization">
+            <field name="name">Stage Default</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//form//sheet//div[hasclass('oe_title')]" position="after">
+                    <group><field name="type_ids" widget="many2many_tags" /></group>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

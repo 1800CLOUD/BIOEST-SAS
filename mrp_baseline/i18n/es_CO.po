@@ -1,0 +1,269 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_baseline
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-14 20:39+0000\n"
+"PO-Revision-Date: 2023-02-14 20:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__account_id
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: mrp_baseline
+#: model:ir.ui.menu,name:mrp_baseline.production_account_menu
+#: model_terms:ir.ui.view,arch_db:mrp_baseline.mrp_workcenter_view_mrp
+msgid "Accounting"
+msgstr "Contabilidad"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_mrp_workcenter__workcenter_cost
+msgid "Accounting entry"
+msgstr "Entrada contable"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__accounts_ids
+msgid "Accounts"
+msgstr "Cuentas"
+
+#. module: mrp_baseline
+#: model_terms:ir.ui.view,arch_db:mrp_baseline.production_account_close_view_form
+msgid "Calculate"
+msgstr "Calcular"
+
+#. module: mrp_baseline
+#: model_terms:ir.ui.view,arch_db:mrp_baseline.production_account_close_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__close_id
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: mrp_baseline
+#: code:addons/mrp_baseline/wizard/production_account_close.py:0
+#: model:ir.actions.act_window,name:mrp_baseline.production_account_close_action
+#: model:ir.model,name:mrp_baseline.model_production_account_close
+#: model:ir.ui.menu,name:mrp_baseline.production_account_close_menu
+#: model_terms:ir.ui.view,arch_db:mrp_baseline.production_account_close_view_form
+#, python-format
+msgid "Close Production Accounts"
+msgstr "Cerrar cuentas de producción"
+
+#. module: mrp_baseline
+#: model:ir.model,name:mrp_baseline.model_production_account_close_line
+msgid "Close Production Accounts Lines"
+msgstr "Líneas de cerrar cuentas de producción"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: mrp_baseline
+#: model_terms:ir.ui.view,arch_db:mrp_baseline.production_account_close_view_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_mrp_workcenter__account_cost_operation_id
+msgid "Cost of Operation Account"
+msgstr "Cuenta de costo de operación"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_mrp_workcenter__account_cost_sale_id
+msgid "Cost of Sale Account"
+msgstr "Cuenta de costo de venta"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__create_uid
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__create_date
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__create_date
+msgid "Created on"
+msgstr "Creado"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__credit
+msgid "Credit"
+msgstr "Crédito"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__date_begin
+msgid "Date Begin"
+msgstr "Fecha inicio"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__date_end
+msgid "Date End"
+msgstr "Fecha final"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__debit
+msgid "Debit"
+msgstr "Débito"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__display_name
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__display_name
+msgid "Display Name"
+msgstr "Nombre Público"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_mrp_workcenter__account_expense_id
+msgid "Expense Account"
+msgstr "Cuenta de gastos"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__id
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_baseline
+#: model:ir.model.fields,help:mrp_baseline.field_mrp_workcenter__workcenter_cost
+msgid "If true, the cost accounting entry is created."
+msgstr "Si es verdadero, se crea el aisiento contable de costos."
+
+#. module: mrp_baseline
+#: model:ir.model.fields,help:mrp_baseline.field_mrp_workcenter__account_cost_operation_id
+msgid ""
+"It is replaced by the expense account when the analytical account is of the "
+"cost of operation type."
+msgstr ""
+"Se reemplaza por la cuenta de gastos cuando la cuenta analítica es del tipo "
+"costo de operación."
+
+#. module: mrp_baseline
+#: model:ir.model.fields,help:mrp_baseline.field_mrp_workcenter__account_cost_sale_id
+msgid ""
+"It is replaced by the expense account when the analytical account is of the "
+"cost of sale type."
+msgstr ""
+"Se reemplaza por la cuenta de gastos cuando la cuenta analítica es del tipo "
+"costo de venta."
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_mrp_workorder__wc_account_move_id
+msgid "Journal Entry"
+msgstr "Entrada de diario"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close____last_update
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__write_uid
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__write_date
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__write_date
+msgid "Last Updated on"
+msgstr "Actualizado"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close__line_ids
+msgid "Line"
+msgstr "Lineas"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__product_id
+msgid "Product"
+msgstr "Products"
+
+#. module: mrp_baseline
+#: code:addons/mrp_baseline/wizard/production_account_close.py:0
+#, python-format
+msgid "Product %s has no quantity. You must do the adjustment manually."
+msgstr "El producto %s no tiene cantidad. Debe ajustar manualmente."
+
+#. module: mrp_baseline
+#: code:addons/mrp_baseline/wizard/production_account_close.py:0
+#, python-format
+msgid "Product %s is not storable."
+msgstr "El producto %s no es almacenable."
+
+#. module: mrp_baseline
+#: model:ir.model,name:mrp_baseline.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_production_account_close_line__residual
+msgid "Residual"
+msgstr "Residual"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,field_description:mrp_baseline.field_mrp_workcenter__stock_journal_id
+msgid "Stock Journal"
+msgstr "Diario de inventario"
+
+#. module: mrp_baseline
+#: model:ir.model.fields,help:mrp_baseline.field_mrp_workcenter__account_expense_id
+msgid "The expense is accounted for when a production order is validated."
+msgstr "El gasto se contabiliza cuando se valida una orden de producción."
+
+#. module: mrp_baseline
+#: model:ir.model.fields,help:mrp_baseline.field_mrp_workcenter__stock_journal_id
+msgid ""
+"When doing automated inventory valuation, this is the Accounting Journal in "
+"which entries will be automatically posted when stock moves are processed."
+msgstr ""
+"Al realizar una valoración de inventario automatizada, este es el diario "
+"contable en el qué las entradas se contabilizarán automáticamente cuando se "
+"procesen los movimientos de stock."
+
+#. module: mrp_baseline
+#: model:ir.model,name:mrp_baseline.model_mrp_workcenter
+msgid "Work Center"
+msgstr "Centro de producción"
+
+#. module: mrp_baseline
+#: model:ir.model,name:mrp_baseline.model_mrp_workorder
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: mrp_baseline
+#: code:addons/mrp_baseline/models/mrp_workorder.py:0
+#, python-format
+msgid "You don't have expense account defined on your work center."
+msgstr "No tiene una cuenta de gastos definida en su centro de producción."
+
+#. module: mrp_baseline
+#: code:addons/mrp_baseline/models/mrp_workorder.py:0
+#, python-format
+msgid "You don't have stock journal defined on your work center."
+msgstr ""
+"No tiene un diario de existencias definido en su centro de producción."
+
+#. module: mrp_baseline
+#: code:addons/mrp_baseline/models/mrp_workorder.py:0
+#: code:addons/mrp_baseline/models/mrp_workorder.py:0
+#, python-format
+msgid "[WC] %s"
+msgstr "[CP] %s"

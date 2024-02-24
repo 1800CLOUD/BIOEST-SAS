@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_purchase_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.1alpha1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-17 13:43+0000\n"
+"PO-Revision-Date: 2021-09-17 13:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_purchase_discount
+#: model_terms:ir.ui.view,arch_db:sh_purchase_discount.report_purchaseorder_document
+msgid "<strong>Disc. (%)</strong>"
+msgstr "<strong>Desct. (%)</strong>"
+
+#. module: sh_purchase_discount
+#: model_terms:ir.ui.view,arch_db:sh_purchase_discount.purchase_order_inherit_view_form
+msgid "Disc.%"
+msgstr "Desct.%"
+
+#. module: sh_purchase_discount
+#: model:ir.model.fields,field_description:sh_purchase_discount.field_purchase_order_line__discount
+msgid "Discount"
+msgstr "Descuento"
+
+#. module: sh_purchase_discount
+#: model:res.groups,name:sh_purchase_discount.group_discount_security
+msgid "Discount on purchase lines"
+msgstr "Descuento en líneas de compra"
+
+#. module: sh_purchase_discount
+#: model:ir.model,name:sh_purchase_discount.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de orden de compra"

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_point_of_sale_baseline_point_of_sale_baseline,point_of_sale_baseline.point_of_sale_baseline,model_point_of_sale_baseline_point_of_sale_baseline,base.group_user,1,1,1,1

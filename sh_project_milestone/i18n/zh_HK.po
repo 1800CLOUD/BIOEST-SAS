@@ -1,0 +1,237 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_project_milestone
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-20 07:57+0000\n"
+"PO-Revision-Date: 2020-10-20 07:57+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+msgid "Cancel"
+msgstr "取消"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields.selection,name:sh_project_milestone.selection__project_milestone__state__cancelled
+msgid "Cancelled"
+msgstr "取消"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__company_id
+msgid "Company"
+msgstr "公司"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+msgid "Complete"
+msgstr "完全的"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields.selection,name:sh_project_milestone.selection__project_milestone__state__completed
+msgid "Completed"
+msgstr "完全的"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__completed_per
+msgid "Completed (%)"
+msgstr "完全的 （％）"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__create_uid
+msgid "Created by"
+msgstr "由...制作"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__create_date
+msgid "Created on"
+msgstr "创建于"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__display_name
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__display_name
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_task__display_name
+#: model:ir.model.fields,field_description:sh_project_milestone.field_report_project_task_user__display_name
+#: model:ir.model.fields,field_description:sh_project_milestone.field_res_users__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__duration
+msgid "Duration (Days)"
+msgstr "持续时间（天）"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__end_date
+msgid "End Date"
+msgstr "结束日期"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+msgid "Expired"
+msgstr "已到期"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+msgid "Group By"
+msgstr "通过...分组"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_task__id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_report_project_task_user__id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_res_users__id
+msgid "ID"
+msgstr "ID"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields.selection,name:sh_project_milestone.selection__project_milestone__state__in_progress
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+msgid "In Progress"
+msgstr "进行中"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__is_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_project_milestone_inherit_form_view
+msgid "Is Milestone ?"
+msgstr "里程碑吗？"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone____last_update
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project____last_update
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_task____last_update
+#: model:ir.model.fields,field_description:sh_project_milestone.field_report_project_task_user____last_update
+#: model:ir.model.fields,field_description:sh_project_milestone.field_res_users____last_update
+msgid "Last Modified on"
+msgstr "最后修改了"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__write_uid
+msgid "Last Updated by"
+msgstr "最后更新"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__write_date
+msgid "Last Updated on"
+msgstr "上次更新了"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__milestone_id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_task__milestone_id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_report_project_task_user__milestone_id
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_project_milestone_inherit_form_view
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_task_milestone_inherit_search_view
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_task_report_user_milestone_inherit_search_view
+msgid "Milestone"
+msgstr "里程碑"
+
+#. module: sh_project_milestone
+#: model:res.groups,name:sh_project_milestone.group_milestone_manager
+msgid "Milestone Manager"
+msgstr "里程碑经理"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_res_users__is_milestone_manager
+msgid "Milestone Manager ?"
+msgstr "里程碑经理？"
+
+#. module: sh_project_milestone
+#: model:ir.actions.act_window,name:sh_project_milestone.sh_action_milestone_to_task_event
+msgid "Milestone To Task"
+msgstr "Mirestone Task."
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__milestone_count
+msgid "Milestone count"
+msgstr "里程碑数量"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields.selection,name:sh_project_milestone.selection__project_milestone__state__new
+msgid "New"
+msgstr "新的"
+
+#. module: sh_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_project_project
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__project_id
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+msgid "Project"
+msgstr "项目"
+
+#. module: sh_project_milestone
+#: model:ir.actions.act_window,name:sh_project_milestone.sh_action_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_project_milestone
+#: model:ir.ui.menu,name:sh_project_milestone.project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_tree_view
+msgid "Project Milestone"
+msgstr "项目里程碑"
+
+#. module: sh_project_milestone
+#: model:ir.actions.act_window,name:sh_project_milestone.sh_action_project_to_milestone_event
+msgid "Project To Milestone"
+msgstr "项目到里程碑"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__rem_day
+msgid "Remaining (Days)"
+msgstr "剩下（天）"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__start_date
+msgid "Start Date"
+msgstr "开始日期"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__state
+msgid "State"
+msgstr "状态"
+
+#. module: sh_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_project_task
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+msgid "Task"
+msgstr "任务"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__task_count
+msgid "Task count"
+msgstr "任务计数"
+
+#. module: sh_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_report_project_task_user
+msgid "Tasks Analysis"
+msgstr "任务分析"
+
+#. module: sh_project_milestone
+#: model:res.groups,comment:sh_project_milestone.group_milestone_manager
+msgid ""
+"This user will be able to do all operation of project milestone ,will have "
+"all rights of base user"
+msgstr ""
+"该用户将能够完成项目里程碑的所有操作，都将有"
+"基础用户的所有权利"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__name
+msgid "Title"
+msgstr "标题"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+msgid "Today Expire"
+msgstr "今天到期"
+
+#. module: sh_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_res_users
+msgid "Users"
+msgstr "用户"

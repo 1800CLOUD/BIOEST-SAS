@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="mrp_workcenter_view_mrp" model="ir.ui.view">
+        <field name="name">mrp.workcenter.view.form.inherit</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_info']/group[1]" position="inside">
+                <group string="Accounting" groups="account.group_account_readonly">
+                    <field name="workcenter_cost" />
+                    <field name="stock_journal_id" invisible="1" attrs="{'invisible!': [('workcenter_cost','=',False)], 'required!': [('workcenter_cost','=',True)]}" />
+                    <field name="account_expense_id" attrs="{'invisible': [('workcenter_cost','=',False)], 'required': [('workcenter_cost','=',True)]}" />
+                    <!-- <field name="account_cost_sale_id" attrs="{'invisible': [('workcenter_cost','!=',False)]}" groups="analytic.group_analytic_accounting" /> -->
+                    <!-- <field name="account_cost_operation_id" attrs="{'invisible': [('workcenter_cost','!=',False)]}" groups="analytic.group_analytic_accounting" /> -->
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

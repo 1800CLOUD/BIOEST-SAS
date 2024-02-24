@@ -1,7 +1,7 @@
 {
     'name': 'Sale Price Restriction',
     "author": "Sottosoft Solution",
-    'version': '15.0.1',
+    'version': '15.0.2',
     "website": "",
     'category': 'Extra Tools',
     "support": "sottosoftsolution@gmail.com",

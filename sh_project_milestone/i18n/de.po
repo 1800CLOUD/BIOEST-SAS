@@ -1,0 +1,237 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_project_milestone
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-20 07:57+0000\n"
+"PO-Revision-Date: 2020-10-20 07:57+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+msgid "Cancel"
+msgstr "Stornieren"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields.selection,name:sh_project_milestone.selection__project_milestone__state__cancelled
+msgid "Cancelled"
+msgstr "Abgesagt"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__company_id
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+msgid "Complete"
+msgstr "Komplett"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields.selection,name:sh_project_milestone.selection__project_milestone__state__completed
+msgid "Completed"
+msgstr "Abgeschlossen"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__completed_per
+msgid "Completed (%)"
+msgstr "Abgeschlossen (%)"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__display_name
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__display_name
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_task__display_name
+#: model:ir.model.fields,field_description:sh_project_milestone.field_report_project_task_user__display_name
+#: model:ir.model.fields,field_description:sh_project_milestone.field_res_users__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__duration
+msgid "Duration (Days)"
+msgstr "Dauer (Tage)"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__end_date
+msgid "End Date"
+msgstr "Endtermin"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+msgid "Expired"
+msgstr "Abgelaufen"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+msgid "Group By"
+msgstr "Gruppiere nach"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_task__id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_report_project_task_user__id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_res_users__id
+msgid "ID"
+msgstr "ICH WÜRDE"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields.selection,name:sh_project_milestone.selection__project_milestone__state__in_progress
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+msgid "In Progress"
+msgstr "In Bearbeitung"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__is_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_project_milestone_inherit_form_view
+msgid "Is Milestone ?"
+msgstr "Ist Meilenstein?"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone____last_update
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project____last_update
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_task____last_update
+#: model:ir.model.fields,field_description:sh_project_milestone.field_report_project_task_user____last_update
+#: model:ir.model.fields,field_description:sh_project_milestone.field_res_users____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert von"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__milestone_id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_task__milestone_id
+#: model:ir.model.fields,field_description:sh_project_milestone.field_report_project_task_user__milestone_id
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_project_milestone_inherit_form_view
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_task_milestone_inherit_search_view
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_task_report_user_milestone_inherit_search_view
+msgid "Milestone"
+msgstr "Meilenstein"
+
+#. module: sh_project_milestone
+#: model:res.groups,name:sh_project_milestone.group_milestone_manager
+msgid "Milestone Manager"
+msgstr "Meilenstein-Manager"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_res_users__is_milestone_manager
+msgid "Milestone Manager ?"
+msgstr "Meilenstein-Manager?"
+
+#. module: sh_project_milestone
+#: model:ir.actions.act_window,name:sh_project_milestone.sh_action_milestone_to_task_event
+msgid "Milestone To Task"
+msgstr "Meilenstein zur Aufgabe"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_project__milestone_count
+msgid "Milestone count"
+msgstr "Meilensteinzahl"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields.selection,name:sh_project_milestone.selection__project_milestone__state__new
+msgid "New"
+msgstr "Neu"
+
+#. module: sh_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_project_project
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__project_id
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+msgid "Project"
+msgstr "Projekt"
+
+#. module: sh_project_milestone
+#: model:ir.actions.act_window,name:sh_project_milestone.sh_action_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_project_milestone
+#: model:ir.ui.menu,name:sh_project_milestone.project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_tree_view
+msgid "Project Milestone"
+msgstr "Meilenstein des Projekts"
+
+#. module: sh_project_milestone
+#: model:ir.actions.act_window,name:sh_project_milestone.sh_action_project_to_milestone_event
+msgid "Project To Milestone"
+msgstr "Projekt zum Meilenstein"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__rem_day
+msgid "Remaining (Days)"
+msgstr "Verbleibende Tage)"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__start_date
+msgid "Start Date"
+msgstr "Anfangsdatum"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__state
+msgid "State"
+msgstr "Zustand"
+
+#. module: sh_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_project_task
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_form_view
+msgid "Task"
+msgstr "Aufgabe"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__task_count
+msgid "Task count"
+msgstr "Anzahl der Aufgaben"
+
+#. module: sh_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_report_project_task_user
+msgid "Tasks Analysis"
+msgstr "Aufgabenanalyse"
+
+#. module: sh_project_milestone
+#: model:res.groups,comment:sh_project_milestone.group_milestone_manager
+msgid ""
+"This user will be able to do all operation of project milestone ,will have "
+"all rights of base user"
+msgstr ""
+"Dieser Benutzer wird in der Lage sein, alle Operationen des Projektmeilensteins durchzuführen, wird"
+"Alle Rechte des Basisbenutzers"
+
+#. module: sh_project_milestone
+#: model:ir.model.fields,field_description:sh_project_milestone.field_project_milestone__name
+msgid "Title"
+msgstr "Titel"
+
+#. module: sh_project_milestone
+#: model_terms:ir.ui.view,arch_db:sh_project_milestone.sh_project_milestone_search_view
+msgid "Today Expire"
+msgstr "Heute verfallen"
+
+#. module: sh_project_milestone
+#: model:ir.model,name:sh_project_milestone.model_res_users
+msgid "Users"
+msgstr "Benutzer"
